@@ -36,6 +36,7 @@ CREATE TABLE IF NOT EXISTS deployment_commits (
 CREATE TABLE IF NOT EXISTS incidents (
     id SERIAL PRIMARY KEY,
     issue_number INTEGER UNIQUE NOT NULL,
+    deploy_id INTEGER REFERENCES deployments(id),
     title TEXT NOT NULL,
     state VARCHAR(20) NOT NULL,
     created_at TIMESTAMP NOT NULL,
@@ -53,6 +54,7 @@ CREATE INDEX IF NOT EXISTS idx_changes_committed_date ON changes(committed_date)
 CREATE INDEX IF NOT EXISTS idx_incidents_created_at ON incidents(created_at);
 CREATE INDEX IF NOT EXISTS idx_incidents_closed_at ON incidents(closed_at);
 CREATE INDEX IF NOT EXISTS idx_incidents_state ON incidents(state);
+CREATE INDEX IF NOT EXISTS idx_incidents_deploy_id ON incidents(deploy_id);
 
 -- Vue pour faciliter l'analyse des déploiements avec leurs commits
 CREATE OR REPLACE VIEW deployment_details AS
