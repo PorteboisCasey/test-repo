@@ -1,1 +1,8 @@
 node_modules/
+dist/
+.env
+*.pyc
+__pycache__/
+.DS_Store
+*.csv
+dora/venv/
